@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knight Trading · Portfolio Hub</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4f5f8;--panel:#fff;--line:#e2e5ec;--tx:#0e1116;--mut:#6a7385;--gold:#b8892b;--pro:#1d6fe8;--los:#d93a3a;--inp:#f4f5f8}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1116;--panel:#161b23;--line:#262d38;--tx:#e8ebf1;--mut:#8b94a5;--gold:#d4a84b;--pro:#4c9bff;--los:#ff6b6b;--inp:#0e1116}}
+:root[data-theme="dark"]{--bg:#0e1116;--panel:#161b23;--line:#262d38;--tx:#e8ebf1;--mut:#8b94a5;--gold:#d4a84b;--pro:#4c9bff;--los:#ff6b6b;--inp:#0e1116}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif}
+.hide{display:none!important}.mut{color:var(--mut)}.pro{color:var(--pro)}.los{color:var(--los)}
+#login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr}
+.hero{padding:48px;display:flex;flex-direction:column;justify-content:space-between;background:#0e1116;color:#e8ebf1;border-right:1px solid #262d38}
+.brand{letter-spacing:.18em;font-size:12px;color:#d4a84b;font-weight:600}
+.hero h1{font:600 clamp(32px,5vw,52px)/1.1 Georgia,serif;margin:0 0 14px}.hero h1 em{color:#d4a84b}
+.hero ol{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:8px;font-size:14px;color:#8b94a5}
+.hero li b{color:#d4a84b;margin-right:10px;font-weight:500}
+.form{padding:48px;display:flex;flex-direction:column;justify-content:center;max-width:440px;width:100%;margin:auto}
+label{display:block;font-size:12px;color:var(--mut);margin:14px 0 6px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--inp);color:var(--tx);font:inherit}
+.row{position:relative}.row button{position:absolute;right:8px;top:8px;background:none;border:0;color:var(--mut);cursor:pointer;padding:4px 8px}
+.btn{width:100%;margin-top:18px;padding:12px;border:0;border-radius:10px;background:var(--gold);color:#0e1116;font-weight:600;font-size:15px;cursor:pointer}
+.link{background:none;border:0;color:var(--gold);cursor:pointer;padding:0;font:inherit;margin-top:18px;text-align:left}
+.note{font-size:12px;color:var(--mut);margin-top:14px}.err{color:var(--los);font-size:13px;margin-top:10px;min-height:18px}
+header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:env(safe-area-inset-top,0px);z-index:5;flex-wrap:wrap}
+header .brand{flex:1}.pill{font-size:12px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pro);margin-right:6px;animation:p 1.6s infinite}@keyframes p{50%{opacity:.3}}
+header button{background:none;border:1px solid var(--line);color:var(--tx);padding:6px 12px;border-radius:8px;cursor:pointer}
+main{padding:20px;max-width:1180px;margin:auto;display:grid;gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{margin:0 0 6px;font-size:12px;font-weight:500;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.big{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.seg{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}.seg button{border:1px solid var(--line);background:none;color:var(--mut);padding:6px 14px;border-radius:99px;cursor:pointer}
+.seg button.on{background:var(--gold);color:#0e1116;border-color:var(--gold)}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums;min-width:640px}
+th{font-weight:500;color:var(--mut);text-align:right;padding:8px;border-bottom:1px solid var(--line);font-size:12px}td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}.tag{font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line)}
+.tag.Algo{color:var(--gold);border-color:var(--gold)}
+svg{width:100%;height:180px;display:block}.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.cg .card{padding:12px;background:var(--bg)}.cg svg{height:90px}.ax{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:4px}
+@media(max-width:820px){#login{grid-template-columns:1fr}.hero{padding:28px;gap:24px}.form{padding:28px}.two{grid-template-columns:1fr}}
+</style></head>
+<body>
+<section id="login">
+ <div class="hero"><div class="brand">KNIGHT TRADING · PORTFOLIO HUB</div>
+  <div><h1>Manage the book <em>like a fund.</em></h1><p class="mut">Live balance and equity across every manual and algo account, in one place.</p>
+  <ol><li><b>01</b>Account feeds</li><li><b>02</b>Balance &amp; equity</li><li><b>03</b>Manual vs Algo</li><li><b>04</b>Risk &amp; drawdown</li><li><b>05</b>Payouts</li></ol></div>
+  <div class="mut" style="font-size:12px">Forex · Metals · Crypto CFDs · Energy · Indices</div></div>
+ <div class="form"><h2 style="margin:0 0 4px">Sign in</h2><div class="mut">Use your work email and password.</div>
+  <label>Work email</label><input id="em" type="email" autocomplete="username" placeholder="you@knighttrading.com">
+  <label>Password</label><div class="row"><input id="pw" type="password" autocomplete="current-password"><button type="button" id="sh">Show</button></div>
+  <div class="err" id="err"></div><button class="btn" id="go">Sign in</button>
+  <button class="link" id="ml">No password yet, or forgot it? Get an email link</button>
+  <div class="note">Demo mode: any email and a password of 6+ characters opens the dashboard. Replace with real auth before going live.</div></div>
+</section>
+
+<section id="app" class="hide">
+ <header><div class="brand">KNIGHT TRADING</div><span class="pill" id="feed"><span class="dot"></span>Simulated feed</span><span class="pill" id="clock"></span><button id="th">Theme</button><button id="out">Sign out</button></header>
+ <main>
+  <div class="grid">
+   <div class="card"><h3>Total balance</h3><div class="big" id="kb"></div></div>
+   <div class="card"><h3>Total equity</h3><div class="big" id="ke"></div></div>
+   <div class="card"><h3>Floating P/L</h3><div class="big" id="kf"></div></div>
+   <div class="card"><h3>Open positions</h3><div class="big" id="kp"></div></div>
+  </div>
+  <div class="two">
+   <div class="card"><h3>Portfolio equity (live)</h3><svg id="ch" viewBox="0 0 600 180" preserveAspectRatio="none"></svg></div>
+   <div class="card"><h3>Manual vs Algo</h3><div id="sum"></div></div>
+  </div>
+  <div class="seg" id="rg"><button data-r="7">7D</button><button data-r="30" class="on">30D</button><button data-r="90">90D</button><button data-r="365">1Y</button><button data-r="0">Since inception</button></div>
+  <div class="card"><h3>Portfolio balance curve</h3><div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span class="big" id="bt"></span><span id="bd"></span></div><svg id="bc" viewBox="0 0 600 180" preserveAspectRatio="none"></svg><div class="ax"><span id="ra"></span><span>Dashed line = start of range</span><span>Today</span></div></div>
+  <div class="card"><div class="seg" id="seg"><button data-f="All" class="on">All</button><button data-f="Algo">Algo</button><button data-f="Manual">Manual</button></div>
+   <div class="tw"><table><thead><tr><th>Account</th><th>Category</th><th>Balance</th><th>Equity</th><th>Floating</th><th>Return</th><th>Drawdown</th><th>Pos.</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+  <div class="card"><h3>Account balance performance</h3><div class="cg" id="cg"></div></div>
+  <div class="card"><h3>Withdrawals &amp; trader payouts</h3><div class="mut" id="rt" style="font-size:13px;margin-bottom:12px"></div><div class="grid" id="wk" style="margin-bottom:14px"></div><div class="tw"><table style="min-width:860px"><thead><tr><th>Account</th><th>Category</th><th>Trader %</th><th>Profit</th><th>Trader share</th><th>Withdrawn</th><th>Paid to trader</th><th>Pending</th><th>Last withdrawal</th></tr></thead><tbody id="wt"></tbody></table></div><h3 style="margin-top:18px">Withdrawals by month</h3><svg id="wb" viewBox="0 0 600 180" preserveAspectRatio="none"></svg><div class="ax"><span>Oldest</span><span><b class="pro">&#9632;</b> Paid to traders &nbsp; <b style="color:var(--gold)">&#9632;</b> Company</span><span>Latest</span></div></div>
+  <div class="note">Last update: <span id="lu">–</span></div>
+ </main>
+</section>
+
+<script>
+// ---- CONFIG -------------------------------------------------------------
+// Set FEED_URL to your own endpoint to use real data. It must return:
+// {"accounts":[{"id","name","broker","category":"Algo"|"Manual","start","balance","equity","positions"}]}
+// Cross-origin calls only work when this page is hosted on your own domain (e.g. Vercel), not in the preview.
+const FEED_URL="";const POLL_MS=2000;
+// -------------------------------------------------------------------------
+const $=id=>document.getElementById(id);
+let accts=[
+ {id:"KT-A1",name:"Asian Range Fade EA",broker:"MT5",category:"Algo",start:25000,balance:27140,equity:27140,positions:2,f:0},
+ {id:"KT-A2",name:"Market Structure EA",broker:"MT5",category:"Algo",start:50000,balance:53320,equity:53320,positions:3,f:0},
+ {id:"KT-A3",name:"Break &amp; Retest EA",broker:"MT4",category:"Algo",start:20000,balance:19480,equity:19480,positions:1,f:0},
+ {id:"KT-M1",name:"Trader 01 (manual)",broker:"MT5",category:"Manual",start:30000,balance:31650,equity:31650,positions:2,f:0},
+ {id:"KT-M2",name:"Trader 02 (manual)",broker:"MT4",category:"Manual",start:15000,balance:14210,equity:14210,positions:1,f:0}];
+let filter="All",hist=[],live=false;
+function seed(a){const n=420;a.bh=Array.from({length:n},(_,i)=>{const t=i/(n-1);return a.start+(a.balance-a.start)*t+(Math.random()-.5)*a.start*.03*Math.sin(Math.PI*t)})}
+const RATE={Manual:.5,Algo:.2};let rng=30;
+function seedW(a){a.w=[];if(a.id=="KT-A3"||a.id=="KT-M2")return;for(let j=1;j<=13;j++)a.w.push({ago:j*30,amt:Math.round(a.start*(.02+Math.random()*.03))})}
+accts.forEach(seed);accts.forEach(seedW);
+function stat(a){const K=rng||1e9,kk=Math.min(K,a.bh.length),v=a.bh.slice(-kk),w=a.w.filter(x=>x.ago<K),ws=w.reduce((s,x)=>s+x.amt,0),p=v[kk-1]-v[0]+ws,r=RATE[a.category];return{v,w,ws,p,r,sh:Math.max(0,p)*r,paid:ws*r,base:v[0]}}
+function extra(list){
+ const L=Math.min(...accts.map(a=>a.bh.length)),K=Math.min(rng||1e9,L),tot=Array.from({length:K},(_,i)=>accts.reduce((s,a)=>s+a.bh[a.bh.length-K+i],0)),ref=tot[0],T=tot[K-1],D=T-ref;
+ $("ra").textContent=rng?rng+" days ago":"Inception";$("bt").textContent=fm(T);$("bd").className=cl(D);$("bd").textContent=sg(D)+" · "+pc(D/ref*100)+" in range";$("bc").innerHTML=ln(tot,600,180,ref);
+ $("cg").innerHTML=list.map(a=>{const s=stat(a),v=s.v,d=v[v.length-1]-v[0];return `<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><div>${a.name}<div class="mut" style="font-size:11px">${a.id} · <span class="tag ${a.category}">${a.category}</span></div></div><div style="text-align:right"><b>${fm(v[v.length-1])}</b><div class="${cl(d)}" style="font-size:12px">${pc(d/v[0]*100)}</div></div></div><svg viewBox="0 0 300 90" preserveAspectRatio="none">${ln(v,300,90,v[0])}</svg></div>`}).join("");
+ $("sum").innerHTML=["Algo","Manual"].map(c=>{const g=accts.filter(a=>a.category===c).map(a=>({a,s:stat(a)})),eq=g.reduce((x,o)=>x+o.a.equity,0),bs=g.reduce((x,o)=>x+o.a.balance,0),p=g.reduce((x,o)=>x+o.s.p,0),b0=g.reduce((x,o)=>x+o.s.base,0),sh=g.reduce((x,o)=>x+o.s.sh,0),wd=g.reduce((x,o)=>x+o.s.ws,0),pos=g.reduce((x,o)=>x+o.a.positions,0);
+  return `<div style="margin-bottom:14px"><span class="tag ${c}">${c}</span> <span class="mut">${g.length} accounts · ${pos} open · trader ${RATE[c]*100}%</span><div class="big" style="font-size:20px">${fm(eq)}</div><div class="${cl(p)}">${sg(p)} · ${pc(p/b0*100)} in range</div><div class="mut" style="font-size:12px">Balance ${fm(bs)} · Withdrawn ${fm(wd)} · Trader share ${fm(sh)}</div></div>`}).join("");
+ const S=list.map(a=>({a,s:stat(a)})),sm=k=>S.reduce((x,o)=>x+o.s[k],0),pend=S.reduce((x,o)=>x+Math.max(0,o.s.sh-o.s.paid),0);
+ $("rt").textContent="Trader share of profit: Manual "+RATE.Manual*100+"% · Algo "+RATE.Algo*100+"% (range: "+(rng?rng+" days":"since inception")+")";
+ $("wk").innerHTML=[["Total withdrawn",fm(sm("ws"))],["Paid to traders",fm(sm("paid"))],["Retained by company",fm(sm("ws")-sm("paid"))],["Pending trader share",fm(pend)]].map(k=>`<div class="card" style="background:var(--bg)"><h3>${k[0]}</h3><div class="big" style="font-size:20px">${k[1]}</div></div>`).join("");
+ const dt=ago=>new Date(Date.now()-ago*864e5).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"2-digit"});
+ $("wt").innerHTML=S.map(({a,s})=>{const l=s.w.length?s.w.reduce((m,x)=>x.ago<m.ago?x:m):null;return `<tr><td>${a.name}<div class="mut" style="font-size:11px">${a.id}</div></td><td><span class="tag ${a.category}">${a.category}</span></td><td>${s.r*100}%</td><td class="${cl(s.p)}">${sg(s.p)}</td><td>${fm(s.sh)}</td><td>${fm(s.ws)}</td><td>${fm(s.paid)}</td><td>${fm(Math.max(0,s.sh-s.paid))}</td><td>${l?fm(l.amt)+" · "+dt(l.ago):"–"}</td></tr>`}).join("")+`<tr style="font-weight:600"><td>Total</td><td></td><td></td><td class="${cl(sm("p"))}">${sg(sm("p"))}</td><td>${fm(sm("sh"))}</td><td>${fm(sm("ws"))}</td><td>${fm(sm("paid"))}</td><td>${fm(pend)}</td><td></td></tr>`;
+ const nb=Math.max(1,Math.min(14,Math.ceil(Math.min(rng||420,420)/30))),bk=Array.from({length:nb},()=>[0,0]);
+ S.forEach(({a,s})=>s.w.forEach(x=>{const b=nb-1-Math.floor(x.ago/30);if(b>=0){bk[b][0]+=x.amt*s.r;bk[b][1]+=x.amt*(1-s.r)}}));
+ const mx=Math.max(1,...bk.map(b=>b[0]+b[1])),bw=600/nb;
+ $("wb").innerHTML=bk.map((b,i)=>{const h1=b[0]/mx*160,h2=b[1]/mx*160;return `<rect x="${i*bw+bw*.15}" y="${175-h1-h2}" width="${bw*.7}" height="${h2}" fill="var(--gold)"/><rect x="${i*bw+bw*.15}" y="${175-h1}" width="${bw*.7}" height="${h1}" fill="var(--pro)"/>`}).join("");
+}
+function ln(v,w,h,ref){const mn=Math.min(...v,ref),mx=Math.max(...v,ref),r=(mx-mn)||1,y=x=>h-6-((x-mn)/r)*(h-12);const p=v.map((x,i)=>`${i/(v.length-1||1)*w},${y(x)}`).join(" ");const c=`var(${v[v.length-1]>=ref?"--pro":"--los"})`;
+return `<polygon points="0,${h} ${p} ${w},${h}" fill="${c}" opacity=".12"/><line x1="0" x2="${w}" y1="${y(ref)}" y2="${y(ref)}" stroke="var(--mut)" stroke-dasharray="4 4" stroke-width="1" vector-effect="non-scaling-stroke"/><polyline points="${p}" fill="none" stroke="${c}" stroke-width="2" vector-effect="non-scaling-stroke"/>`}
+const fm=n=>n.toLocaleString("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+const sg=n=>(n>=0?"+":"−")+fm(Math.abs(n)).replace("-","");
+const cl=n=>n>=0?"pro":"los";
+const pc=n=>(n>=0?"+":"−")+Math.abs(n).toFixed(2)+"%";
+function sim(){accts.forEach(a=>{a.f+=(Math.random()-.5)*a.balance*.0016;a.f*=.985;a.equity=a.balance+a.f;if(Math.random()<.03)a.positions=Math.max(0,a.positions+(Math.random()<.5?-1:1))})}
+async function pull(){
+ if(FEED_URL){try{const r=await fetch(FEED_URL,{cache:"no-store"});const d=await r.json();accts=d.accounts.map(a=>({...a,f:a.equity-a.balance,bh:a.history||[a.balance],w:(a.withdrawals||[]).map(x=>({ago:Math.max(0,Math.floor((Date.now()-new Date(x.date))/864e5)),amt:x.amount}))}));live=true}catch(e){live=false;sim()}}
+ else sim();
+ render()}
+function render(){
+ const list=accts.filter(a=>filter==="All"||a.category===filter);
+ const sum=k=>accts.reduce((s,a)=>s+a[k],0);
+ const B=sum("balance"),E=sum("equity"),F=E-B;
+ $("kb").textContent=fm(B);$("ke").textContent=fm(E);
+ $("kf").textContent=sg(F);$("kf").className="big "+cl(F);$("kp").textContent=sum("positions");
+ hist.push(E);if(hist.length>80)hist.shift();draw();
+ $("sum").innerHTML=["Algo","Manual"].map(c=>{const g=accts.filter(a=>a.category===c);
+  const b=g.reduce((s,a)=>s+a.balance,0),e=g.reduce((s,a)=>s+a.equity,0),s0=g.reduce((s,a)=>s+a.start,0),p=e-s0;
+  return `<div style="margin-bottom:14px"><span class="tag ${c}">${c}</span> <span class="mut">${g.length} accounts</span>
+  <div class="big" style="font-size:20px">${fm(e)}</div><div class="${cl(p)}">${sg(p)} · ${pc(p/s0*100)} since start</div><div class="mut" style="font-size:12px">Balance ${fm(b)}</div></div>`}).join("");
+ $("tb").innerHTML=list.map(a=>{const r=(a.equity-a.start)/a.start*100,dd=Math.max(0,(Math.max(a.balance,a.start)-a.equity)/Math.max(a.balance,a.start)*100);
+  return `<tr><td>${a.name}<div class="mut" style="font-size:11px">${a.id} · ${a.broker}</div></td><td><span class="tag ${a.category}">${a.category}</span></td>
+  <td>${fm(a.balance)}</td><td>${fm(a.equity)}</td><td class="${cl(a.f)}">${sg(a.f)}</td><td class="${cl(r)}">${pc(r)}</td><td class="${dd>10?"los":""}">${dd.toFixed(2)}%</td><td>${a.positions}</td></tr>`}).join("");
+ $("feed").innerHTML=`<span class="dot"></span>${live?"Live feed":"Simulated feed"}`;
+ const L=Math.min(...accts.map(a=>a.bh.length)),tot=Array.from({length:L},(_,i)=>accts.reduce((s,a)=>s+a.bh[a.bh.length-L+i],0)),S=accts.reduce((s,a)=>s+a.start,0),T=tot[L-1],D=T-S;
+ $("bt").textContent=fm(T);$("bd").className=cl(D);$("bd").textContent=sg(D)+" · "+pc(D/S*100)+" since start";$("bc").innerHTML=ln(tot,600,180,S);
+ $("cg").innerHTML=list.map(a=>{const d=a.bh[a.bh.length-1]-a.start;return `<div class="card"><div style="display:flex;justify-content:space-between;gap:8px"><div>${a.name}<div class="mut" style="font-size:11px">${a.id} · <span class="tag ${a.category}">${a.category}</span></div></div><div style="text-align:right"><b>${fm(a.bh[a.bh.length-1])}</b><div class="${cl(d)}" style="font-size:12px">${pc(d/a.start*100)}</div></div></div><svg viewBox="0 0 300 90" preserveAspectRatio="none">${ln(a.bh,300,90,a.start)}</svg></div>`}).join("");
+ $("lu").textContent=new Date().toLocaleTimeString();extra(list)}
+function draw(){const mn=Math.min(...hist),mx=Math.max(...hist),rg=(mx-mn)||1;
+ const pts=hist.map((v,i)=>`${(i/Math.max(1,hist.length-1))*600},${170-((v-mn)/rg)*150}`).join(" ");
+ const up=hist[hist.length-1]>=hist[0];
+ $("ch").innerHTML=`<polyline points="${pts}" fill="none" stroke="var(${up?"--pro":"--los"})" stroke-width="2" vector-effect="non-scaling-stroke"/>`}
+let timer;
+function show(on){$("login").classList.toggle("hide",on);$("app").classList.toggle("hide",!on);clearInterval(timer);
+ if(on){hist=[];pull();timer=setInterval(pull,POLL_MS)}}
+$("go").onclick=()=>{const e=$("em").value.trim(),p=$("pw").value;
+ if(!/^\S+@\S+\.\S+$/.test(e)||p.length<6){$("err").textContent="Enter a valid email and a password of 6+ characters.";return}
+ $("err").textContent="";show(true)};
+$("pw").onkeydown=e=>{if(e.key==="Enter")$("go").click()};
+$("sh").onclick=()=>{const t=$("pw").type==="password";$("pw").type=t?"text":"password";$("sh").textContent=t?"Hide":"Show"};
+$("ml").onclick=()=>{$("err").style.color="var(--mut)";$("err").textContent="Email-link sign-in needs a backend; not wired in this demo."};
+$("out").onclick=()=>show(false);
+$("seg").onclick=e=>{const f=e.target.dataset.f;if(!f)return;filter=f;[...$("seg").children].forEach(b=>b.classList.toggle("on",b.dataset.f===f));render()};
+$("rg").onclick=e=>{const r=e.target.dataset.r;if(r===undefined)return;rng=+r;[...$("rg").children].forEach(b=>b.classList.toggle("on",b.dataset.r===r));render()};
+$("th").onclick=()=>{const d=document.documentElement,cur=d.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");d.dataset.theme=cur==="dark"?"light":"dark"};
+setInterval(()=>{$("clock").textContent=new Date().toUTCString().slice(17,25)+" UTC"},1000);
+</script></body></html>
